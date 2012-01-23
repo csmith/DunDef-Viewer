@@ -54,10 +54,7 @@
      }
     });
 
-    $('<img/>').attr('id', 'map')
-               .attr('src', levels[layout.level - 1].minimap)
-               .attr('alt', levels[layout.level - 1].name + " map")
-               .appendTo($('#mapcontainer'));
+    $('#mapcontainer').css('background-image', 'url("' + levels[layout.level - 1].minimap + '")');
 
     $.each(layout.towers, function() {
      createElForTower(towers[this.type])
@@ -70,7 +67,7 @@
    });
   </script>
   <style type="text/css">
-   #mapcontainer { position: relative; }
+   #mapcontainer { position: relative; width: 1024px; height: 1024px; }
    .tower, .core { width: 40px; height: 40px; }
   </style>
  </head>
