@@ -55,6 +55,10 @@
        .css('position', 'absolute')
        .offset(adjustMapOffset(tower.position, thisLevel))
        .rotate(tower.rotation)
+       .dblclick(function() {
+        layout.towers = $.grep(layout.towers, function(value) { return value != tower; });
+        $(this).remove();
+       })
        .mousedown(function(e) {
         if (!e.shiftKey) {
          return;
@@ -71,7 +75,7 @@
           var newMouseAngle = Math.atan2(mouseY, mouseX);
           var mouseDelta = newMouseAngle - initialMouseAngle;
           var rotation = initialRotation + newMouseAngle * (180 / Math.PI);
-          el.data('tower').rotation = rotation;
+          tower.rotation = rotation;
           el.rotate(rotation);
         };
 
