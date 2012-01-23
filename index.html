@@ -4,14 +4,41 @@
   <title>Dungeon Defenders Viewer</title>
   <script src="res/js/jquery-1.7.1.min.js" type="text/javascript"></script>
   <script src="res/js/jquery-ui-1.8.17.custom.min.js" type="text/javascript"></script>
+  <script src="res/data/levels.js" type="text/javascript"></script>
   <script src="res/data/towers.js" type="text/javascript"></script>
+  <script src="res/data/layout.js" type="text/javascript"></script>
   <script type="text/javascript">
    $(function() {
+    $.fn.rotate = function(rot) {
+     return this.css('-webkit-transform', 'rotate(' + rot + 'deg)')
+                .css('-moz-transform', 'rotate(' + rot + 'deg');
+    };
+
+    function createElForTower(type) {
+     return $('<img>')
+       .attr('src', type.image)
+       .attr('alt', type.name)
+       .addClass('tower');
+    }
+
+    function adjustMapOffset(towerOffset, level) {
+     var res = $.extend({}, towerOffset);
+
+     if (level.offsets) {
+      res.left += level.offsets.left;
+      res.top += level.offsets.top;
+     }
+
+     if (level.scale) {
+      res.left *= level.scale.left;
+      res.top *= level.scale.top;
+     }
+
+     return res;
+    }
+
     $.each(towers, function() {
-     $('<img>')
-       .attr('src', this.image)
-       .attr('alt', this.name)
-       .addClass('tower')
+     createElForTower(this)
        .appendTo($('#palette'));
     });
 
@@ -26,6 +53,15 @@
         .appendTo(document.body);
      }
     });
+
+    $.each(layout.towers, function() {
+     createElForTower(towers[this.type])
+       .draggable()
+       .css('position', 'absolute')
+       .offset(adjustMapOffset(this.position, levels[layout.level - 1]))
+       .rotate(this.rotation)
+       .appendTo($('#palette'));
+    });
    });
   </script>
   <style type="text/css">
@@ -33,7 +69,7 @@
   </style>
  </head>
  <body>
-  <img src="res/images/minimaps/Level1.png" alt="Level 1 minimap" id="map">
+  <img src="res/images/minimaps/TheSpires.png" alt="Minimap" id="map">
   <img src="res/images/coreIcon.png" alt="core" class="core">
 
   <div id="palette">
