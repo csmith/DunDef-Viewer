@@ -4,8 +4,17 @@
   <title>Dungeon Defenders Viewer</title>
   <script src="res/js/jquery-1.7.1.min.js" type="text/javascript"></script>
   <script src="res/js/jquery-ui-1.8.17.custom.min.js" type="text/javascript"></script>
+  <script src="res/data/towers.js" type="text/javascript"></script>
   <script type="text/javascript">
    $(function() {
+    $.each(towers, function() {
+     $('<img>')
+       .attr('src', this.image)
+       .attr('alt', this.name)
+       .addClass('tower')
+       .appendTo($('#palette'));
+    });
+
     $('.tower,.core').draggable();
    });
   </script>
@@ -16,9 +25,8 @@
  <body>
   <img src="res/images/minimaps/Level1.png" alt="Level 1 minimap" id="map">
   <img src="res/images/coreIcon.png" alt="core" class="core">
-  <img src="res/images/towers/blockadeTower_Icon.png" alt="Blockade Tower" class="tower">
-  <img src="res/images/towers/blockadeTower_Icon.png" alt="Blockade Tower" class="tower">
-  <img src="res/images/towers/blockadeTower_Icon.png" alt="Blockade Tower" class="tower">
-  <img src="res/images/towers/missleTower_Icon.png" alt="Magic missile tower" class="tower">
+
+  <div id="palette">
+  </div>
  </body>
 </html>
