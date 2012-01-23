@@ -119,8 +119,12 @@
 
     $('.tower,.core').draggable({
      helper: 'clone',
-     containment: 'window',
+     containment: 'document',
      stop: function(evt, ui) {
+      if (!$(this).data('type')) {
+       return;
+      }
+
       var tower = {
        type: $(this).data('type'),
        rotation: 0,
