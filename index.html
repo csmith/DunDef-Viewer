@@ -54,22 +54,28 @@
      }
     });
 
+    $('<img/>').attr('id', 'map')
+               .attr('src', levels[layout.level - 1].minimap)
+               .attr('alt', levels[layout.level - 1].name + " map")
+               .appendTo($('#mapcontainer'));
+
     $.each(layout.towers, function() {
      createElForTower(towers[this.type])
        .draggable()
        .css('position', 'absolute')
        .offset(adjustMapOffset(this.position, levels[layout.level - 1]))
        .rotate(this.rotation)
-       .appendTo($('#palette'));
+       .appendTo($('#mapcontainer'));
     });
    });
   </script>
   <style type="text/css">
-   .tower { width: 40px; height: 40px; }
+   #mapcontainer { position: relative; }
+   .tower, .core { width: 40px; height: 40px; }
   </style>
  </head>
  <body>
-  <img src="res/images/minimaps/TheSpires.png" alt="Minimap" id="map">
+  <div id="mapcontainer"></div>
   <img src="res/images/coreIcon.png" alt="core" class="core">
 
   <div id="palette">

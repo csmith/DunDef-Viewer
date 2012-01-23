@@ -10,7 +10,7 @@ var levels = [
  {name: 'The Throne Room', minimap: 'res/images/minimaps/Level8.png', image: 'res/images/levels/Level8.jpg'},
  {name: 'Royal Gardens', minimap: 'res/images/minimaps/RoyalGardens.png', image: 'res/images/levels/Level9.jpg'},
  {name: 'The Ramparts', minimap: 'res/images/minimaps/Level9.png', image: 'res/images/levels/Level10.jpg'},
- {name: 'Endless Spires', minimap: 'res/images/minimaps/TheSpires.png', image: 'res/images/levels/Level11.jpg', offsets: {left: 150, top: 65}, scale: {left: 1.04, top: 1.04}},
+ {name: 'Endless Spires', minimap: 'res/images/minimaps/TheSpires.png', image: 'res/images/levels/Level11.jpg', offsets: {left: 142, top: 57}, scale: {left: 1.04, top: 1.04}},
  {name: 'The Summit', minimap: 'res/images/minimaps/TheSummit.png', image: 'res/images/levels/Level12.jpg'},
 
 ];
