@@ -9,17 +9,26 @@
   <script src="res/data/layout.js" type="text/javascript"></script>
   <script type="text/javascript">
    $(function() {
-    var activeTower, thisLevel;
+    var thisLevel;
 
     $.fn.rotate = function(rot) {
+     this.data('rotation', rot);
+
      return this.css('-webkit-transform', 'rotate(' + rot + 'deg)')
-                .css('-moz-transform', 'rotate(' + rot + 'deg');
+                .css('-moz-transform', 'rotate(' + rot + 'deg')
+                .css('-o-transform', 'rotate(' + rot + 'deg')
+                .css('transform', 'rotate(' + rot + 'deg');
     };
 
     $.fn.offsetFrom = function(el) {
      var offset = this.offset();
      var otherOffset = $(el).offset();
      return {top: offset.top - otherOffset.top, left: offset.left - otherOffset.left};
+    }
+
+    $.fn.offsetCentre = function() {
+     var offset = this.offset();
+     return {top: offset.top + this.height() / 2, left: offset.left + this.width() / 2};
     }
 
     function createBaseElForTower(key) {
@@ -35,10 +44,44 @@
     function createElForTower(tower) {
      return createBaseElForTower(tower.type)
        .data('tower', tower)
-       .draggable()
+       .draggable({
+        start: function(evt) {
+         return !evt.shiftKey;
+        }
+       })
        .css('position', 'absolute')
        .offset(adjustMapOffset(tower.position, thisLevel))
-       .rotate(tower.rotation);
+       .rotate(tower.rotation)
+       .mousedown(function(e) {
+        if (!e.shiftKey) {
+         return;
+        }
+
+        var el = $(this);
+        var centre = el.offsetCentre();
+        var mouseX = e.pageX - centre.left, mouseY = e.pageY - centre.top;
+        var initialMouseAngle = Math.atan2(mouseY, mouseX);
+        var initialRotation = el.data('rotation');
+
+        var moveHandler = function(evt) {
+          var mouseX = evt.pageX - centre.left, mouseY = evt.pageY - centre.top;
+          var newMouseAngle = Math.atan2(mouseY, mouseX);
+          var mouseDelta = newMouseAngle - initialMouseAngle;
+          var rotation = initialRotation + newMouseAngle * (180 / Math.PI);
+          el.data('tower').rotation = rotation;
+          el.rotate(rotation);
+        };
+
+        var upHandler = function() {
+         $(document).unbind('mousemove', moveHandler);
+         $(document).unbind('mouseup', upHandler);
+        };
+
+        $(document).mousemove(moveHandler);
+        $(document).mouseup(upHandler);
+
+        return false;
+       });
     }
 
     function adjustMapOffset(towerOffset, level, reverse) {
