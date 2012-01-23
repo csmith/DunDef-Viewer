@@ -47,6 +47,9 @@
        .draggable({
         start: function(evt) {
          return !evt.shiftKey;
+        },
+        stop: function() {
+         $(this).data('tower').position = adjustMapOffset($(this).offsetFrom('#mapcontainer'), thisLevel, 1);
         }
        })
        .css('position', 'absolute')
