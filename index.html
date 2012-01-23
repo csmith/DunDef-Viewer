@@ -15,7 +15,17 @@
        .appendTo($('#palette'));
     });
 
-    $('.tower,.core').draggable();
+    $('.tower,.core').draggable({
+     helper: 'clone',
+     containment: 'window',
+     stop: function(evt, ui) {
+      $(this).clone()
+        .draggable()
+        .css('position', 'absolute')
+        .offset(ui.helper.offset())
+        .appendTo(document.body);
+     }
+    });
    });
   </script>
   <style type="text/css">
