@@ -149,15 +149,89 @@
    });
   </script>
   <style type="text/css">
-   #mapcontainer { position: relative; width: 1024px; height: 1024px; }
+   body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+   }
+
+   #header, #header h1 {
+    margin: 0;
+    padding: 0;
+   }
+
+   #header {
+    padding: 10px 20px;
+    background-image: linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
+    background-image: -o-linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
+    background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
+    background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
+    background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
+
+    background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.28, rgb(255,255,255)),
+	color-stop(0.64, rgb(244,245,242))
+    );
+    border-bottom: 1px solid rgb(244, 245, 242);
+   }
+
+   #header img {
+    vertical-align: bottom;
+   }
+
+   #header span {
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-left: 20px;
+    color: #300;
+   }
+
+   #sidebar {
+    float: left;
+    width: 200px;
+    padding: 10px;
+    min-height: 1024px;
+    border-right: 1px solid rgb(244, 245, 242);
+   }
+
+   #palette {
+    text-align: center;
+   }
+
+   #palette h2 {
+    margin: 0;
+    color: #300;
+   }
+
+   #palette p {
+    font-size: x-small;
+    margin-top: 0;
+   }
+
+   #mapcontainer {
+    position: relative;
+    width: 1024px;
+    height: 1024px;
+    margin-left: 221px;
+   }
+
    .tower, .core { width: 40px; height: 40px; }
   </style>
  </head>
  <body>
-  <div id="mapcontainer"></div>
-  <img src="res/images/coreIcon.png" alt="core" class="core">
-
-  <div id="palette">
+  <div id="header">
+   <h1><img src="res/images/dd-logo.png" alt="Dungeon Defenders"><span>Layout Editor</span></h1>
   </div>
+  <div id="sidebar">
+   <div id="palette">
+    <h2>Palette</h2>
+    <p>Drag and drop towers onto the map</p>
+   </div>
+   <img src="res/images/coreIcon.png" alt="core" class="core">
+  </div>
+  <div id="mapcontainer"></div>
  </body>
 </html>
