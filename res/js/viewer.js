@@ -36,6 +36,7 @@ $(function() {
   return createBaseElForTower(tower.type)
     .data('tower', tower)
     .draggable({
+     containment: 'document',
      start: function(evt) {
       return !evt.shiftKey;
      },
