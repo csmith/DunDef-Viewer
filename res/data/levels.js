@@ -107,4 +107,13 @@ var levels = [
   offsets: {left: 200, top: 115}
  },
 
+ {
+  name: 'Glitterhelm Caverns',
+  minimap: 'res/images/minimaps/caverns_minimap.png',
+  image: 'http://placehold.it/200x100',
+  du: 165,
+  offsets: {left: 90, top: 40},
+  scale: {left: 1.3, top: 1.25}
+ },
+
 ];
