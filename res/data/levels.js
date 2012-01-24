@@ -13,14 +13,18 @@ var levels = [
   name: 'Foundries and Forges',
   minimap: 'res/images/minimaps/Level2.png',
   image: 'res/images/levels/Level2.jpg',
-  du: 80
+  du: 80,
+  offsets: {left: 80, top: 35},
+  scale: {left: 1.35, top: 1.35}
  },
 
  {
   name: 'Magus Quarters',
   minimap: 'res/images/minimaps/Level3.png',
   image: 'res/images/levels/Level3.jpg',
-  du: 90
+  du: 90,
+  offsets: {left: 85, top: 50},
+  scale: {left: 1.35, top: 1.35}
  },
 
  {
@@ -36,35 +40,45 @@ var levels = [
   name: 'Servants Quarters',
   minimap: 'res/images/minimaps/Level5.png',
   image: 'res/images/levels/Level5.jpg',
-  du: 85
+  du: 85,
+  offsets: {left: 115, top: 120},
+  scale: {left: 1.17, top: 1.17}
  },
 
  {
   name: 'Castle Armory',
   minimap: 'res/images/minimaps/Level6.png',
   image: 'res/images/levels/Level6.jpg',
-  du: 90
+  du: 90,
+  offsets: {left: 80, top: 45},
+  scale: {left: 1.35, top: 1.34}
  },
 
  {
   name: 'Hall of Court',
   minimap: 'res/images/minimaps/Level7.png',
   image: 'res/images/levels/Level7.jpg',
-  du: 100
+  du: 100,
+  offsets: {left: 35, top: 80},
+  scale: {left: 1.45, top: 1.45}
  },
 
  {
   name: 'The Throne Room',
   minimap: 'res/images/minimaps/Level8.png',
   image: 'res/images/levels/Level8.jpg',
-  du: 100
+  du: 100,
+  offsets: {left: 18, top: 130},
+  scale: {left: 1.6, top: 1.5}
  },
 
  {
   name: 'Royal Gardens',
   minimap: 'res/images/minimaps/RoyalGardens.png',
   image: 'res/images/levels/Level9.jpg',
-  du: 130
+  du: 130,
+  offsets: {left: 170, top: 55},
+  scale: {left: 1.2, top: 1.2}
  },
 
  {
