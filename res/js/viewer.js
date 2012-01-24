@@ -162,6 +162,8 @@ $(function() {
  }
 
  function saveLayout() {
+  layout.notes = $('#notecontent').val();
+
   $('#save_inprogress').show();
   $('#save_done').hide();
   $('#savecontainer').show();
