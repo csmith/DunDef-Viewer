@@ -210,5 +210,10 @@ $(function() {
   $.getJSON('res/data/layouts/' + id + '.js', updateLayout);
  }
 
- getLayout(parseInt(getURLParameter('id')) || 13934);
+ var id = getURLParameter('id');
+ if (id === null || id === 'null') {
+  updateLayout({level: key + 1, towers:[]});
+ } else {
+  getLayout(id);
+ }
 });
