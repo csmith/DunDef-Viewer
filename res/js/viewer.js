@@ -1,5 +1,6 @@
 $(function() {
  var thisLevel;
+ var layout;
 
  function updateDefenseUnits() {
   var used = 0;
@@ -136,7 +137,9 @@ $(function() {
 
  function clearLayout() {
   $('#mapcontainer .tower').remove();
-  layout.towers = [];
+  if (layout) {
+   layout.towers = [];
+  }
  }
 
  $.each(levels, function(key) {
@@ -144,9 +147,7 @@ $(function() {
    .append($('<img>').attr('src', this.image))
    .append($('<p>').text(this.name))
    .click(function() {
-    clearLayout();
-    layout = {level: key + 1, towers:[]};
-    updateLayout();
+    updateLayout({level: key + 1, towers:[]});
     closePicker();
    })
    .appendTo($('#layoutpicker'));
@@ -164,6 +165,8 @@ $(function() {
  $('#layoutmask').click(closePicker);
 
  function updateLayout(data) {
+  clearLayout();
+
   layout = data;
   thisLevel = levels[layout.level - 1];
   $('#mapcontainer').css('background-image', 'url("' + thisLevel.minimap + '")');
