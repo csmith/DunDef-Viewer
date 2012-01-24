@@ -271,8 +271,13 @@
     color: white;
    }
 
-   .tower, .core, #palette .tower.monk { width: 40px; height: 40px; z-index: 100; }
+   .tower, .core, #palette .tower.monk { width: 40px; height: 40px; }
    .tower.monk, #palette .tower.monk.ui-draggable-dragging { width: 95px; height: 95px; }
+   .tower.monk { z-index: 97; }
+   .tower.huntress { z-index: 98; }
+   .tower.squire { z-index: 99; }
+   .tower.apprentice { z-index: 100; }
+   body .tower.ui-draggable-dragging { z-index: 101; }
   </style>
  </head>
  <body>
