@@ -1,6 +1,7 @@
 var layout = {
 
  level: 11,
+ notes: "Hello!",
 
  towers: [
   {type: 'blockade', position: {left: 326, top: 232}, rotation: 0},

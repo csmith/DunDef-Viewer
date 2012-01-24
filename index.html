@@ -143,6 +143,7 @@
     thisLevel = levels[layout.level - 1];
     $('#mapcontainer').css('background-image', 'url("' + thisLevel.minimap + '")');
 
+    $('#notecontent').val(layout.notes);
     $.each(layout.towers, function() {
      createElForTower(this).appendTo($('#mapcontainer'));
     });
@@ -197,13 +198,20 @@
     border-right: 1px solid rgb(244, 245, 242);
    }
 
-   #palette {
+   #palette, #notes {
     text-align: center;
+    margin-bottom: 20px;
    }
 
-   #palette h2 {
+   h2 {
     margin: 0;
     color: #300;
+   }
+
+   #notecontent {
+    width: 100%;
+    height: 300px;
+    max-width: 100%;
    }
 
    #palette p {
@@ -229,6 +237,10 @@
    <div id="palette">
     <h2>Palette</h2>
     <p>Drag and drop towers onto the map</p>
+   </div>
+   <div id="notes">
+    <h2>Notes</h2>
+    <textarea id="notecontent"></textarea>
    </div>
    <img src="res/images/coreIcon.png" alt="core" class="core">
   </div>
