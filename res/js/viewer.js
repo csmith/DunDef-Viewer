@@ -172,7 +172,7 @@ $(function() {
   $.ajax({
    type: 'POST',
    url: 'res/data/layouts/new',
-   data: JSON.stringify(layout),
+   data: {layout: JSON.stringify(layout)},
    success: function(res) {
     var url = window.location.href + "?id=" + res;
     $('#link').children().remove();
