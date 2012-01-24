@@ -161,8 +161,32 @@ $(function() {
   $('#layoutcontainer').hide();
  }
 
+ function saveLayout() {
+  $('#save_inprogress').show();
+  $('#save_done').hide();
+  $('#savecontainer').show();
+  $('#save_error').hide();
+
+  $.ajax({
+   type: 'POST',
+   url: 'data/layouts/new',
+   data: JSON.stringify(layout),
+   success: function(res) {
+    var url = window.location.href + "?id=" + res;
+    $('#link').children().remove();
+    $('<a>').attr('href', url).text(url).appendTo($('#link'));
+    $('#save_inprogress').hide();
+    $('#save_done').show();
+   },
+   error: function(xhr, status, error) {
+    $('#save_error').text('Save failed! Server said: ' + error).show();
+   }
+  });
+ }
+
  $('#createlayout').click(showPicker);
  $('#layoutmask').click(closePicker);
+ $('#savelayout').click(saveLayout);
 
  function updateLayout(data) {
   clearLayout();

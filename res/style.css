@@ -25,11 +25,21 @@ body {
  float: left;
 }
 
-#header button {
+#header #buttons {
  float: right;
  height: 40px;
  margin: 15px;
+}
+
+#header #createlayout {
  color: #300;
+}
+
+#header #savelayout {
+ color: #030;
+}
+
+#header button {
  font-variant: small-caps;
  font-weight: bold;
  text-transform: lowercase;
@@ -101,7 +111,7 @@ h2 {
 .tower.apprentice { z-index: 100; }
 body .tower.ui-draggable-dragging { z-index: 101; }
 
-#layoutmask {
+.mask {
  position: fixed;
  top: 0;
  left: 0;
@@ -112,18 +122,29 @@ body .tower.ui-draggable-dragging { z-index: 101; }
  opacity: 0.8;
 }
 
-#layoutpicker {
+.dialog {
  position: fixed;
- top: 150px;
- left: 200px;
- right: 200px;
- bottom: 100px;
  background-color: white;
  border: 2px solid rgb(244, 245, 242);
  z-index: 201;
  overflow: auto;
  text-align: center;
  padding: 50px;
+}
+
+#layoutpicker {
+ top: 150px;
+ left: 200px;
+ right: 200px;
+ bottom: 100px;
+}
+
+#savedialog {
+ top: 200px;
+ left: 50%;
+ height: 300px;
+ width: 500px;
+ margin-left: -250px;
 }
 
 #layoutpicker button {
@@ -142,4 +163,9 @@ body .tower.ui-draggable-dragging { z-index: 101; }
 
 .initiallyhidden {
  display: none;
+}
+
+.error {
+ color: red;
+ font-weight: bold;
 }

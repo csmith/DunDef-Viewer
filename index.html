@@ -13,7 +13,10 @@
  <body>
   <div id="header">
    <h1><img src="res/images/dd-logo.png" alt="Dungeon Defenders"><span>Layout Editor</span></h1>
-   <button id="createlayout">Create new layout</button>
+   <div id="buttons">
+    <button id="savelayout">Save this layout</button>
+    <button id="createlayout">Create new layout</button>
+   </div>
   </div>
   <div id="sidebar">
    <div id="palette">
@@ -32,9 +35,27 @@
   </div>
   <div id="mapcontainer"></div>
   <div id="layoutcontainer" class="initiallyhidden">
-   <div id="layoutmask"></div>
-   <div id="layoutpicker">
+   <div id="layoutmask" class="mask"></div>
+   <div id="layoutpicker" class="dialog">
     <h2>Select a level</h2>
+   </div>
+  </div>
+  <div id="savecontainer" class="initiallyhidden">
+   <div id="savemask" class="mask"></div>
+   <div id="savedialog" class="dialog">
+    <div id="save_inprogress">
+     <h2 style="margin-bottom: 50px;">Saving...</h2>
+     <p style="margin-bottom: 50px;"><img src="res/images/loading.gif" alt="Loading indicator"></p>
+     <p id="save_error" class="initiallyhidden error"></p>
+    </div>
+    <div id="save_done" class="initiallyhidden">
+     <h2>Saved</h2>
+     <p>
+      Your layout has been saved.
+      Share this link:
+     </p>
+     <p id="link"></p>
+    </div>
    </div>
   </div>
  </body>
