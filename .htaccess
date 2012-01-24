@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^/?res/data/layouts/([0-9]+).js http://mifune.co.uk/~shane/convert.php?id=$1 [P]
