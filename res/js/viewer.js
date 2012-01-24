@@ -163,7 +163,8 @@ $(function() {
  $('#createlayout').click(showPicker);
  $('#layoutmask').click(closePicker);
 
- function updateLayout() {
+ function updateLayout(data) {
+  layout = data;
   thisLevel = levels[layout.level - 1];
   $('#mapcontainer').css('background-image', 'url("' + thisLevel.minimap + '")');
 
@@ -177,7 +178,7 @@ $(function() {
  }
 
  function getLayout(id) {
-  $.getScript('res/data/layouts/' + id + '.js', updateLayout);
+  $.getJSON('res/data/layouts/' + id + '.js', updateLayout);
  }
 
  getLayout(parseInt(getURLParameter('id')) || 13934);

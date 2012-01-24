@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^/?res/data/layouts/([0-9]+).js http://mifune.co.uk/~shane/convert.php?id=$1 [P]
+RewriteRule ^/?res/data/layouts/([0-9]+).js http://backend.layoutviewer.co.uk/getLayout/$1.js [P]
