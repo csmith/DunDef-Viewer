@@ -133,6 +133,35 @@ $(function() {
   }
  });
 
+ function clearLayout() {
+  $('#mapcontainer .tower').remove();
+  layout.towers = [];
+ }
+
+ $.each(levels, function(key) {
+  $('<button>')
+   .append($('<img>').attr('src', this.image))
+   .append($('<p>').text(this.name))
+   .click(function() {
+    clearLayout();
+    layout = {level: key + 1, towers:[]};
+    updateLayout();
+    closePicker();
+   })
+   .appendTo($('#layoutpicker'));
+ });
+
+ function showPicker() {
+  $('#layoutcontainer').show();
+ }
+
+ function closePicker() {
+  $('#layoutcontainer').hide();
+ }
+
+ $('#createlayout').click(showPicker);
+ $('#layoutmask').click(closePicker);
+
  function updateLayout() {
   thisLevel = levels[layout.level - 1];
   $('#mapcontainer').css('background-image', 'url("' + thisLevel.minimap + '")');
@@ -140,8 +169,8 @@ $(function() {
   $('#notecontent').val(layout.notes);
   $.each(layout.towers, function() {
    createElForTower(this).appendTo($('#mapcontainer'));
-   updateDefenseUnits();
   });
+  updateDefenseUnits();
 
   $('#du_total').text(thisLevel.du);
  }

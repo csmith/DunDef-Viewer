@@ -10,6 +10,7 @@ body {
 }
 
 #header {
+  height: 70px;
   padding: 10px 20px;
   background-image: linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
   background-image: -o-linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
@@ -18,6 +19,21 @@ body {
   background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 28%, rgb(244,245,242) 64%);
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.28, rgb(255,255,255)), color-stop(0.64, rgb(244,245,242)));
   border-bottom: 1px solid rgb(244, 245, 242);
+}
+
+#header h1 {
+ float: left;
+}
+
+#header button {
+ float: right;
+ height: 40px;
+ margin: 15px;
+ color: #300;
+ font-variant: small-caps;
+ font-weight: bold;
+ text-transform: lowercase;
+ padding: 10px;
 }
 
 #header img {
@@ -84,3 +100,46 @@ h2 {
 .tower.squire { z-index: 99; }
 .tower.apprentice { z-index: 100; }
 body .tower.ui-draggable-dragging { z-index: 101; }
+
+#layoutmask {
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: #999;
+ z-index: 200;
+ opacity: 0.8;
+}
+
+#layoutpicker {
+ position: fixed;
+ top: 150px;
+ left: 200px;
+ right: 200px;
+ bottom: 100px;
+ background-color: white;
+ border: 2px solid rgb(244, 245, 242);
+ z-index: 201;
+ overflow: auto;
+ text-align: center;
+ padding: 50px;
+}
+
+#layoutpicker button {
+ margin: 30px;
+}
+
+#layoutpicker button p {
+ margin: 5px;
+ font-size: large;
+}
+
+#layoutpicker button img {
+ width: 200px;
+ height: 100px;
+}
+
+.initiallyhidden {
+ display: none;
+}
