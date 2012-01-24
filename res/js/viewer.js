@@ -171,7 +171,7 @@ $(function() {
 
   $.ajax({
    type: 'POST',
-   url: 'data/layouts/new',
+   url: 'res/data/layouts/new',
    data: JSON.stringify(layout),
    success: function(res) {
     var url = window.location.href + "?id=" + res;
