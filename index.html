@@ -28,6 +28,26 @@
      return {top: offset.top + this.height() / 2, left: offset.left + this.width() / 2};
     }
 
+    function updateDefenseUnits() {
+     var used = 0;
+
+     $.each(layout.towers, function() {
+      used += towers[this.type].units;
+     });
+
+     $('#du_used').text(used);
+
+     var hasClass = $('#du_wrapper').hasClass('over');
+
+     $('#du_wrapper').removeClass('over');
+     if (used > thisLevel.du) {
+      $('#du_wrapper').addClass('over');
+      if (!hasClass) {
+       $('#du_wrapper').effect('pulsate', {times: 2}, 'fast');
+      }
+     }
+    }
+
     function getURLParameter(name) {
      return decodeURIComponent((location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,null])[1]);
     }
@@ -59,6 +79,7 @@
        .dblclick(function() {
         layout.towers = $.grep(layout.towers, function(value) { return value != tower; });
         $(this).remove();
+        updateDefenseUnits();
        })
        .mousedown(function(e) {
         if (!e.shiftKey) {
@@ -138,6 +159,7 @@
 
       layout.towers.push(tower);
       createElForTower(tower).appendTo($('#mapcontainer'));
+      updateDefenseUnits();
      }
     });
 
@@ -148,7 +170,10 @@
      $('#notecontent').val(layout.notes);
      $.each(layout.towers, function() {
       createElForTower(this).appendTo($('#mapcontainer'));
+      updateDefenseUnits();
      });
+
+     $('#du_total').text(thisLevel.du);
     }
 
     function getLayout(id) {
@@ -207,7 +232,7 @@
     border-right: 1px solid rgb(244, 245, 242);
    }
 
-   #palette, #notes {
+   #sidebar > div {
     text-align: center;
     margin-bottom: 20px;
    }
@@ -228,11 +253,21 @@
     margin-top: 0;
    }
 
+   #stats p {
+    margin: 0;
+    padding: 3px 0;
+   }
+
    #mapcontainer {
     position: relative;
     width: 1024px;
     height: 1024px;
     margin-left: 221px;
+   }
+
+   #du_wrapper.over {
+    background-color: #600;
+    color: white;
    }
 
    .tower, .core { width: 40px; height: 40px; z-index: 100; }
@@ -246,6 +281,10 @@
    <div id="palette">
     <h2>Palette</h2>
     <p>Drag and drop towers onto the map</p>
+   </div>
+   <div id="stats">
+    <h2>Stats</h2>
+    <p id="du_wrapper">Defense Units: <span id="du_used">0</span>/<span id="du_total">0</span></p>
    </div>
    <div id="notes">
     <h2>Notes</h2>
