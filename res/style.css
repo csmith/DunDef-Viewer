@@ -129,6 +129,10 @@ body .tower.ui-draggable-dragging { z-index: 101; }
  z-index: 201;
  overflow: auto;
  text-align: center;
+ padding: 0;
+}
+
+.dialog .container {
  padding: 50px;
 }
 
@@ -147,7 +151,7 @@ body .tower.ui-draggable-dragging { z-index: 101; }
  margin-left: -250px;
 }
 
-#layoutpicker button {
+#layoutpicker .container button {
  margin: 30px;
 }
 
@@ -168,4 +172,17 @@ body .tower.ui-draggable-dragging { z-index: 101; }
 .error {
  color: red;
  font-weight: bold;
+}
+
+.dialog .close {
+ float: right;
+ margin: 0;
+ background: white url('images/close.png') no-repeat left center;
+ padding: 10px 10px 10px 25px;
+ border: 0;
+ cursor: pointer;
+}
+
+.dialog .close:hover {
+ text-decoration: underline;
 }

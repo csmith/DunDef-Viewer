@@ -150,7 +150,7 @@ $(function() {
     updateLayout({level: key + 1, towers:[]});
     closePicker();
    })
-   .appendTo($('#layoutpicker'));
+   .appendTo($('#layoutpicker .container'));
  });
 
  function showPicker() {
@@ -188,6 +188,7 @@ $(function() {
 
  $('#createlayout').click(showPicker);
  $('#layoutmask').click(closePicker);
+ $('#layoutclose').click(closePicker);
  $('#savelayout').click(saveLayout);
 
  function updateLayout(data) {
