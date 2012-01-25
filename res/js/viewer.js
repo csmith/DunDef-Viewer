@@ -144,10 +144,13 @@ $(function() {
  }
 
  $.each(levels, function(key) {
+  var name = this.name;
+
   $('<button>')
    .append($('<img>').attr('src', this.image))
-   .append($('<p>').text(this.name))
+   .append($('<p>').text(name))
    .click(function() {
+    _gaq.push(['_trackEvent', 'Level picker', 'Picked', name]);
     updateLayout({level: key + 1, towers:[]});
     closePicker();
    })
@@ -155,6 +158,7 @@ $(function() {
  });
 
  function showPicker() {
+  _gaq.push(['_trackEvent', 'Level picker', 'Shown']);
   $('#layoutcontainer').show();
  }
 
@@ -163,6 +167,8 @@ $(function() {
  }
 
  function saveLayout() {
+  _gaq.push(['_trackEvent', 'General', 'Save']);
+
   layout.notes = $('#notecontent').val();
 
   $('#save_inprogress').show();
@@ -198,6 +204,9 @@ $(function() {
 
   layout = data;
   thisLevel = levels[layout.level - 1];
+
+  _gaq.push(['_setCustomVar', 1, 'Level', thisLevel.name, 1]);
+
   $('#mapcontainer').css('background-image', 'url("' + thisLevel.minimap + '")');
 
   $('#notecontent').val(layout.notes);
@@ -210,6 +219,7 @@ $(function() {
  }
 
  function getLayout(id) {
+  _gaq.push(['_trackPageview', '/view/' + id]);
   $.getJSON('res/data/layouts/' + id + '.js', updateLayout);
  }
 
