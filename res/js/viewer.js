@@ -150,6 +150,7 @@ $(function() {
    .append($('<img>').attr('src', this.image))
    .append($('<p>').text(name))
    .click(function() {
+    window.location.hash = '';
     _gaq.push(['_trackEvent', 'Level picker', 'Picked', name]);
     updateLayout({level: key + 1, towers:[]});
     closePicker();
