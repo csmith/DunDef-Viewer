@@ -174,7 +174,8 @@ $(function() {
    url: 'res/data/layouts/new',
    data: {layout: JSON.stringify(layout)},
    success: function(res) {
-    var url = window.location.href + "?id=" + res;
+    window.location.hash = res;
+    var url = window.location.href;
     $('#link').children().remove();
     $('<a>').attr('href', url).text(url).appendTo($('#link'));
     $('#save_inprogress').hide();
@@ -211,10 +212,15 @@ $(function() {
   $.getJSON('res/data/layouts/' + id + '.js', updateLayout);
  }
 
- var id = getURLParameter('id');
- if (id === null || id === 'null') {
-  updateLayout({level: key + 1, towers:[]});
- } else {
-  getLayout(id);
+ function updateFromHash() {
+  var id = window.location.hash;
+  if (id === '') {
+   updateLayout({level: 1, towers:[]});
+  } else {
+   getLayout(id.substr(1));
+  }
  }
+
+ $(window).bind('hashchange', updateFromHash);
+ updateFromHash();
 });
