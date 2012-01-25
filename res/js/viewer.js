@@ -42,7 +42,8 @@ $(function() {
       return !evt.shiftKey;
      },
      stop: function() {
-      $(this).data('tower').position = adjustMapOffset($(this).offsetFrom('#mapcontainer'), thisLevel, 1);
+      var el = $(this);
+      el.data('tower').position = adjustMapOffset({top: parseInt(el.css('top')), left: parseInt(el.css('left'))}, thisLevel, 1);
      }
     })
     .css('position', 'absolute')
