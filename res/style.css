@@ -63,6 +63,7 @@ body {
   padding: 10px;
   min-height: 1024px;
   border-right: 1px solid rgb(244, 245, 242);
+  background-color: white;
 }
 
 #sidebar > div {
@@ -185,4 +186,19 @@ body .tower.ui-draggable-dragging { z-index: 101; }
 
 .dialog .close:hover {
  text-decoration: underline;
+}
+
+#instructions {
+ padding: 10px;
+ border-bottom: 1px solid rgb(244, 245, 242);
+}
+
+#instructions h2, #instructions p {
+ display: inline-block;
+ margin: 0;
+ padding-left: 10px;
+}
+
+#instructions h2 {
+ padding-left: 20px;
 }
