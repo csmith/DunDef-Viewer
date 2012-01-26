@@ -47,6 +47,8 @@ $(function() {
      }
     })
     .css('position', 'absolute')
+    .css('height', (40 * thisLevel.towerscale * towers[tower.type].defaultscale) + 'px')
+    .css('width', (40 * thisLevel.towerscale * towers[tower.type].defaultscale) + 'px')
     .offset(adjustMapOffset(tower.position, thisLevel))
     .rotate(tower.rotation)
     .dblclick(function() {
