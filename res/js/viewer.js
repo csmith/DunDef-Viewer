@@ -195,10 +195,16 @@ $(function() {
   });
  }
 
+ function closeSave() {
+  $('#savecontainer').hide();
+ }
+
  $('#createlayout').click(showPicker);
  $('#layoutmask').click(closePicker);
  $('#layoutclose').click(closePicker);
  $('#savelayout').click(saveLayout);
+ $('#savemask').click(closeSave);
+ $('#saveclose').click(closeSave);
 
  function updateLayout(data) {
   clearLayout();
