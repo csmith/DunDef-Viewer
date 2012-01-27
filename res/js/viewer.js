@@ -22,6 +22,16 @@ $(function() {
   }
  }
 
+ function createElForCore() {
+  return $('<img>')
+    .attr('src', 'res/images/coreIcon.png')
+    .attr('alt', 'Core')
+    .addClass('core')
+    .css('position', 'absolute')
+    .css('height', (40 * thisLevel.towerscale) + 'px')
+    .css('width', (40 * thisLevel.towerscale) + 'px');
+ }
+
  function createBaseElForTower(key) {
   var type = towers[key];
 
@@ -145,6 +155,10 @@ $(function() {
   }
  }
 
+ function clearCores() {
+  $('#mapcontainer .core').remove();
+ }
+
  $.each(levels, function(key) {
   var name = this.name;
 
@@ -210,9 +224,14 @@ $(function() {
 
  function updateLayout(data) {
   clearLayout();
+  clearCores();
 
   layout = data;
   thisLevel = levels[layout.level - 1];
+
+  $.each(thisLevel.cores, function() {
+   createElForCore().offset(adjustMapOffset(this, thisLevel)).appendTo($('#mapcontainer'));
+  });
 
   _gaq.push(['_setCustomVar', 1, 'Level', thisLevel.name, 1]);
 
