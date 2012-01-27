@@ -168,7 +168,7 @@ $(function() {
    .click(function() {
     window.location.hash = '';
     _gaq.push(['_trackEvent', 'Level picker', 'Picked', name]);
-    updateLayout({level: key + 1, towers:[]});
+    showBlankLayout(key + 1);
     closePicker();
    })
    .appendTo($('#layoutpicker .container'));
@@ -251,10 +251,18 @@ $(function() {
   $.getJSON('res/data/layouts/' + id + '.js', updateLayout);
  }
 
+ function showBlankLayout(id) {
+  window.location.hash = 'blank:' + id;
+  _gaq.push(['_trackPageview', '/view/blank:' + id]);
+  updateLayout({level: id, towers:[]});
+ }
+
  function updateFromHash() {
   var id = window.location.hash;
   if (id === '') {
-   updateLayout({level: 1, towers:[]});
+   showBlankLayout(1);
+  } else if (id.substr(0,7) == '#blank:') {
+   showBlankLayout(parseInt(id.substr(7)));
   } else {
    getLayout(id.substr(1));
   }
