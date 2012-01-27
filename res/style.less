@@ -1,0 +1,226 @@
+@gradient-start-color: rgb(244,245,242);
+@gradient-end-color: rgb(255,255,255);
+
+@heading-color: #300;
+
+@mask-color: #999;
+@mask-opacity: 0.8;
+
+@create-color: @heading-color;
+@save-color: #030;
+
+@border-color: @gradient-start-color;
+@border: 1px solid @border-color;
+
+.linear-vertical-gradient(@start-color, @end-color, @start-pc: 0.64, @end-pc: 0.28) {
+ background-image: linear-gradient(bottom, @end-color percentage(@end-pc), @start-color percentage(@start-pc));
+ background-image: -o-linear-gradient(bottom, @end-color percentage(@end-pc), @start-color percentage(@start-pc));
+ background-image: -moz-linear-gradient(bottom, @end-color percentage(@end-pc), @start-color percentage(@start-pc));
+ background-image: -webkit-linear-gradient(bottom, @end-color percentage(@end-pc), @start-color percentage(@start-pc));
+ background-image: -ms-linear-gradient(bottom, @end-color percentage(@end-pc), @start-color percentage(@start-pc));
+ background-image: -webkit-gradient(linear, left bottom, left top, color-stop(@end-pc, @gradient-end-color), color-stop(@start-pc, @gradient-start-color));
+}
+
+body {
+ font-family: sans-serif;
+ margin: 0;
+ padding: 0;
+}
+
+#header {
+ height: 70px;
+ padding: 10px 20px;
+ .linear-vertical-gradient(@gradient-start-color, @gradient-end-color);
+ border-bottom: @border;
+
+ &, & h1 {
+  margin: 0;
+  padding: 0;
+ }
+
+ h1 {
+  float: left;
+
+  img {
+   vertical-align: bottom;
+   width: 106px;
+   height: 70px;
+  }
+
+  span {
+   display: inline-block;
+   padding-bottom: 10px;
+   margin-left: 20px;
+   color: @heading-color;
+  }
+ }
+
+ #buttons {
+  float: right;
+  height: 40px;
+  margin: 15px;
+
+  #createlayout {
+   color: @create-color;
+  }
+
+  #savelayout {
+   color: @save-color;
+  }
+
+  button {
+   font-variant: small-caps;
+   font-weight: bold;
+   text-transform: lowercase;
+   padding: 10px;
+  }
+ }
+}
+
+#sidebar {
+ float: left;
+ width: 200px;
+ padding: 10px;
+ min-height: 1024px;
+ border-right: @border;
+ background-color: white;
+
+ & > div {
+  text-align: center;
+  margin-bottom: 20px;
+ }
+}
+
+h2 {
+ margin: 0;
+ color: @heading-color;
+}
+
+#notecontent {
+ width: 100%;
+ height: 300px;
+ max-width: 100%;
+}
+
+#palette p {
+ font-size: x-small;
+ margin-top: 0;
+}
+
+#stats p {
+ margin: 0;
+ padding: 3px 0;
+}
+
+#mapcontainer {
+ position: relative;
+ width: 1024px;
+ height: 1024px;
+ margin-left: 221px;
+}
+
+#du_wrapper.over {
+ background-color: #600;
+ color: white;
+}
+
+.tower, .core, #palette .tower.monk { width: 40px; height: 40px; }
+.tower.monk, #palette .tower.monk.ui-draggable-dragging { width: 95px; height: 95px; }
+.tower.monk { z-index: 97; }
+.tower.huntress { z-index: 98; }
+.tower.squire { z-index: 99; }
+.tower.apprentice { z-index: 100; }
+body .tower.ui-draggable-dragging { z-index: 101; }
+
+.mask {
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: @mask-color;
+ z-index: 200;
+ opacity: @mask-opacity;
+}
+
+.dialog {
+ position: fixed;
+ background-color: white;
+ border: @border;
+ z-index: 201;
+ overflow: auto;
+ text-align: center;
+ padding: 0;
+
+ .container {
+  padding: 50px;
+ }
+
+ .close {
+  float: right;
+  margin: 0;
+  background: white url('images/close.png') no-repeat left center;
+  padding: 10px 10px 10px 25px;
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+   text-decoration: underline;
+  }
+ }
+}
+
+#layoutpicker {
+ top: 150px;
+ left: 200px;
+ right: 200px;
+ bottom: 100px;
+
+ .container button {
+  margin: 30px;
+ }
+
+ button {
+  p {
+   margin: 5px;
+   font-size: large;
+  }
+
+  img {
+   width: 200px;
+   height: 100px;
+  }
+ }
+}
+
+#savedialog {
+ top: 200px;
+ left: 50%;
+ height: 300px;
+ width: 500px;
+ margin-left: -250px;
+}
+
+.initiallyhidden {
+ display: none;
+}
+
+.error {
+ color: red;
+ font-weight: bold;
+}
+
+#instructions {
+ padding: 10px;
+ border-bottom: @border;
+
+ h2, p {
+  display: inline-block;
+  margin: 0;
+  padding-left: 10px;
+ }
+
+ h2 {
+  padding-left: 20px;
+ }
+}
