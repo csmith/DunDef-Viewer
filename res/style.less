@@ -8,6 +8,7 @@
 
 @create-color: @heading-color;
 @save-color: #030;
+@instructions-color: #003;
 
 @border-color: @gradient-start-color;
 @border: 1px solid @border-color;
@@ -65,7 +66,12 @@ body {
   }
 
   #savelayout {
+   margin-left: 20px;
    color: @save-color;
+  }
+
+  #showinstructions {
+   color: @instructions-color;
   }
 
   button {
@@ -222,5 +228,14 @@ body .tower.ui-draggable-dragging { z-index: 101; }
 
  h2 {
   padding-left: 20px;
+ }
+
+ button {
+  margin-left: 20px;
+  opacity: 0.6;
+
+  &:hover {
+   opacity: 1;
+  }
  }
 }

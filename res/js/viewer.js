@@ -268,6 +268,25 @@ $(function() {
   }
  }
 
+ function showInstructions() {
+  $.cookie('hideinstructions', null);
+  $('#instructions').show();
+  $('#showinstructions').hide();
+ }
+
+ function hideInstructions() {
+  $.cookie('hideinstructions', 1, { expires: 365 });
+  $('#instructions').hide();
+  $('#showinstructions').show();
+ }
+
+ $('#hideinstructions').click(hideInstructions);
+ $('#showinstructions').click(showInstructions);
+
  $(window).bind('hashchange', updateFromHash);
  updateFromHash();
+
+ if ($.cookie('hideinstructions')) {
+  hideInstructions();
+ }
 });
