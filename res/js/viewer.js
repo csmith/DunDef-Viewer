@@ -317,6 +317,26 @@ $(function() {
   });
   updateDefenseUnits();
 
+  var difficulty = layout.difficulty ? layout.difficulty : "unknown";
+  $('#difficulty').text(difficulty).removeClass().addClass(difficulty);
+
+  var type = layout.type && layout.type != 'none' ? layout.type : "unknown";
+  var modes = '';
+  layout.mode && $.each(layout.mode, function() {
+   if (this == "hardcore") {
+    modes = '<abbr title="Hardcore">hc</abbr> ' + modes;
+   } else if (this == "mixed") {
+    modes = '<abbr title="Mixed mode">mm</abbr> ' + modes;
+   } else if (this == "strategy") {
+    modes = '<abbr title="Pure strategy">ps</abbr> ' + modes;
+   } else if (this == "none") {
+    modes = 'none';
+   }
+  });
+
+  $('#type').text(type);
+  $('#modes').html(modes == '' ? 'unknown' : modes);
+
   $('#du_total').text(thisLevel.du);
  }
 
