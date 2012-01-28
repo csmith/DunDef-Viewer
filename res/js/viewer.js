@@ -1,4 +1,143 @@
 $(function() {
+
+ // Instructions
+ (function() {
+  var cookieName = 'hideinstructions';
+
+  function showInstructions() {
+   $.cookie(cookieName, null);
+   $('#instructions').show();
+   $('#showinstructions').hide();
+  }
+
+  function hideInstructions() {
+   $.cookie(cookieName, 1, { expires: 365 });
+   $('#instructions').hide();
+   $('#showinstructions').show();
+  }
+
+  $('#hideinstructions').click(hideInstructions);
+  $('#showinstructions').click(showInstructions);
+
+  if ($.cookie(cookieName)) {
+   hideInstructions();
+  }
+ })();
+
+ // Saving
+ (function() {
+  function saveLayout() {
+   _gaq.push(['_trackEvent', 'General', 'Save']);
+
+   layout.notes = $('#notecontent').val();
+
+   $('#save_inprogress').show();
+   $('#save_done').hide();
+   $('#savecontainer').show();
+   $('#save_error').hide();
+
+   $.ajax({
+    type: 'POST',
+    url: 'res/data/layouts/new',
+    data: {layout: JSON.stringify(layout)},
+    success: function(res) {
+     window.location.hash = res;
+     var url = window.location.href;
+     $('#link').children().remove();
+     $('<a>').attr('href', url).text(url).appendTo($('#link'));
+     $('#save_inprogress').hide();
+     $('#save_done').show();
+    },
+    error: function(xhr, status, error) {
+     $('#save_error').text('Save failed! Server said: ' + error).show();
+    }
+   });
+  }
+
+  function closeSave() {
+   $('#savecontainer').hide();
+  }
+
+  $('#savelayout').click(saveLayout);
+  $('#savemask').click(closeSave);
+  $('#saveclose').click(closeSave);
+ })();
+
+ // Layout picker
+ (function() {
+  $.each(levels, function(key) {
+   var name = this.name;
+
+   $('<button>')
+    .append($('<img>').attr('src', this.image))
+    .append($('<p>').text(name))
+    .click(function() {
+     window.location.hash = '';
+     _gaq.push(['_trackEvent', 'Level picker', 'Picked', name]);
+     showBlankLayout(key + 1);
+     closePicker();
+    })
+    .appendTo($('#layoutpicker .container'));
+  });
+
+  function showPicker() {
+   _gaq.push(['_trackEvent', 'Level picker', 'Shown']);
+   $('#layoutcontainer').show();
+  }
+
+  function closePicker() {
+   $('#layoutcontainer').hide();
+  }
+
+  $('#createlayout').click(showPicker);
+  $('#layoutmask').click(closePicker);
+  $('#layoutclose').click(closePicker);
+ })();
+
+ // Address management
+ (function() {
+  function updateFromHash() {
+   var id = window.location.hash;
+   if (id === '') {
+    showBlankLayout(1);
+   } else if (id.substr(0,7) == '#blank:') {
+    showBlankLayout(parseInt(id.substr(7)));
+   } else {
+    getLayout(id.substr(1));
+   }
+  }
+
+  $(window).bind('hashchange', updateFromHash);
+  updateFromHash();
+ })();
+
+ // Palette
+ (function() {
+  $.each(towers, function(key) {
+   createBaseElForTower(key, this).appendTo($('#palette'));
+  });
+
+  $('.tower,.core').draggable({
+   helper: 'clone',
+   containment: 'document',
+   stop: function(evt, ui) {
+    if (!$(this).data('type')) {
+     return;
+    }
+
+    var tower = {
+     type: $(this).data('type'),
+     rotation: 0,
+     position: adjustMapOffset(ui.helper.offsetFrom('#mapcontainer'), thisLevel, 1)
+    };
+
+    layout.towers.push(tower);
+    createElForTower(tower).appendTo($('#mapcontainer'));
+    updateDefenseUnits();
+   }
+  });
+ })();
+
  var thisLevel;
  var layout;
 
@@ -124,30 +263,6 @@ $(function() {
   return res;
  }
 
- $.each(towers, function(key) {
-  createBaseElForTower(key, this).appendTo($('#palette'));
- });
-
- $('.tower,.core').draggable({
-  helper: 'clone',
-  containment: 'document',
-  stop: function(evt, ui) {
-   if (!$(this).data('type')) {
-    return;
-   }
-
-   var tower = {
-    type: $(this).data('type'),
-    rotation: 0,
-    position: adjustMapOffset(ui.helper.offsetFrom('#mapcontainer'), thisLevel, 1)
-   };
-
-   layout.towers.push(tower);
-   createElForTower(tower).appendTo($('#mapcontainer'));
-   updateDefenseUnits();
-  }
- });
-
  function clearLayout() {
   $('#mapcontainer .tower').remove();
   if (layout) {
@@ -158,69 +273,6 @@ $(function() {
  function clearCores() {
   $('#mapcontainer .core').remove();
  }
-
- $.each(levels, function(key) {
-  var name = this.name;
-
-  $('<button>')
-   .append($('<img>').attr('src', this.image))
-   .append($('<p>').text(name))
-   .click(function() {
-    window.location.hash = '';
-    _gaq.push(['_trackEvent', 'Level picker', 'Picked', name]);
-    showBlankLayout(key + 1);
-    closePicker();
-   })
-   .appendTo($('#layoutpicker .container'));
- });
-
- function showPicker() {
-  _gaq.push(['_trackEvent', 'Level picker', 'Shown']);
-  $('#layoutcontainer').show();
- }
-
- function closePicker() {
-  $('#layoutcontainer').hide();
- }
-
- function saveLayout() {
-  _gaq.push(['_trackEvent', 'General', 'Save']);
-
-  layout.notes = $('#notecontent').val();
-
-  $('#save_inprogress').show();
-  $('#save_done').hide();
-  $('#savecontainer').show();
-  $('#save_error').hide();
-
-  $.ajax({
-   type: 'POST',
-   url: 'res/data/layouts/new',
-   data: {layout: JSON.stringify(layout)},
-   success: function(res) {
-    window.location.hash = res;
-    var url = window.location.href;
-    $('#link').children().remove();
-    $('<a>').attr('href', url).text(url).appendTo($('#link'));
-    $('#save_inprogress').hide();
-    $('#save_done').show();
-   },
-   error: function(xhr, status, error) {
-    $('#save_error').text('Save failed! Server said: ' + error).show();
-   }
-  });
- }
-
- function closeSave() {
-  $('#savecontainer').hide();
- }
-
- $('#createlayout').click(showPicker);
- $('#layoutmask').click(closePicker);
- $('#layoutclose').click(closePicker);
- $('#savelayout').click(saveLayout);
- $('#savemask').click(closeSave);
- $('#saveclose').click(closeSave);
 
  function updateLayout(data) {
   clearLayout();
@@ -255,38 +307,5 @@ $(function() {
   window.location.hash = 'blank:' + id;
   _gaq.push(['_trackPageview', '/view/blank:' + id]);
   updateLayout({level: id, towers:[]});
- }
-
- function updateFromHash() {
-  var id = window.location.hash;
-  if (id === '') {
-   showBlankLayout(1);
-  } else if (id.substr(0,7) == '#blank:') {
-   showBlankLayout(parseInt(id.substr(7)));
-  } else {
-   getLayout(id.substr(1));
-  }
- }
-
- function showInstructions() {
-  $.cookie('hideinstructions', null);
-  $('#instructions').show();
-  $('#showinstructions').hide();
- }
-
- function hideInstructions() {
-  $.cookie('hideinstructions', 1, { expires: 365 });
-  $('#instructions').hide();
-  $('#showinstructions').show();
- }
-
- $('#hideinstructions').click(hideInstructions);
- $('#showinstructions').click(showInstructions);
-
- $(window).bind('hashchange', updateFromHash);
- updateFromHash();
-
- if ($.cookie('hideinstructions')) {
-  hideInstructions();
  }
 });
