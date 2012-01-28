@@ -160,6 +160,23 @@ $(function() {
   });
  })();
 
+ // Searching
+ (function() {
+  $('#search_classes img').click(function() {
+   var el = $(this);
+   if (el.hasClass('disabled')) {
+    el.removeClass('disabled');
+   } else {
+    el.addClass('disabled');
+   }
+  });
+
+  var sel = $('select[name=search_map]');
+  $.each(levels, function(key) {
+   $('<option>').val(key + 1).text(this.name).appendTo(sel);
+  });
+ })();
+
  var thisLevel;
  var layout;
 

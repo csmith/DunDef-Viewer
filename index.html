@@ -15,6 +15,7 @@
    <h1><img src="res/images/dd-logo.png" alt="Dungeon Defenders"><span>Layout Editor</span></h1>
    <div id="buttons">
     <button id="showinstructions" class="initiallyhidden">Show Instructions</button>
+    <button id="search" class="initiallyhidden">Search layouts</button>
     <button id="savelayout">Save this layout</button>
     <button id="createlayout">Create new layout</button>
    </div>
@@ -50,6 +51,7 @@
    </div>
    <div id="mapcontainer"></div>
   </div>
+
   <div id="layoutcontainer" class="initiallyhidden">
    <div id="layoutmask" class="mask"></div>
    <div id="layoutpicker" class="dialog">
@@ -59,6 +61,63 @@
     </div>
    </div>
   </div>
+
+  <div id="searchcontainer" class="initiallyhidden">
+   <div id="searchmask" class="mask"></div>
+   <div id="searchdialog" class="dialog">
+    <button id="searchclose" class="close">Close</button>
+    <div class="container">
+     <h2>Search layouts</h2>
+     <div id="searchterms">
+      <form>
+       <div class="formrow">
+        <label for="search_map">Level</label>
+        <select name="search_map">
+         <option value="any">Any level</option>
+        </select>
+       </div>
+       <div class="formrow">
+        <label for="search_difficulty">Difficulty</label>
+        <select name="search_difficulty">
+         <option value="any">Any difficulty</option>
+         <option value="easy" class="easy">Easy</option>
+         <option value="medium" class="medium">Medium</option>
+         <option value="hard" class="hard">Hard</option>
+         <option value="insane" class="insane">Insane</option>
+         <option value="nightmare" class="nightmare">Nightmare</option>
+        </select>
+       </div>
+       <div class="formrow">
+        <label for="search_type">Type</label>
+        <select name="search_type">
+         <option value="any">Any type</label>
+         <option value="campaign">Campaign</option>
+         <option value="survival">Survival</option>
+         <option value="challenge">Challenge</option>
+        </select>
+       </div>
+       <div class="formrow modesrow">
+        <label>Modes</label>
+        <label><input type="checkbox" name="search_hc"> Hard Core</label>
+        <label><input type="checkbox" name="search_mm"> Mixed Mode</label>
+        <label><input type="checkbox" name="search_ps"> Pure Strategy</label>
+       </div>
+       <div class="formrow" id="search_classes">
+        <label for="search_classes">Using classes</label>
+        <img src="res/images/classes/huntress_icon.png" id="search_huntress" alt="Huntress">
+        <img src="res/images/classes/mage_icon.png" id="search_apprentice" alt="Apprentice">
+        <img src="res/images/classes/monk_icon.png" id="search_monk" alt="Monk">
+        <img src="res/images/classes/squire_icon.png" id="search_squire" alt="Squire">
+       </div>
+       <div class="formrow submit">
+        <button id="search_submit">Search</button>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div>
+  </div>
+
   <div id="savecontainer" class="initiallyhidden">
    <div id="savemask" class="mask"></div>
    <div id="savedialog" class="dialog">

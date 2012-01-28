@@ -73,14 +73,14 @@ body {
   #showinstructions {
    color: @instructions-color;
   }
-
-  button {
-   font-variant: small-caps;
-   font-weight: bold;
-   text-transform: lowercase;
-   padding: 10px;
-  }
  }
+}
+
+button {
+ font-variant: small-caps;
+ font-weight: bold;
+ text-transform: lowercase;
+ padding: 10px;
 }
 
 #sidebar {
@@ -172,6 +172,59 @@ body .tower.ui-draggable-dragging { z-index: 101; }
 
   &:hover {
    text-decoration: underline;
+  }
+ }
+}
+
+#searchdialog {
+ top: 150px;
+ left: 200px;
+ right: 200px;
+ bottom: 100px;
+
+ #searchterms {
+  width: 300px;
+  float: left;
+
+  select {
+   width: 170px;
+  }
+
+  .formrow {
+   clear: left;
+   text-align: left;
+
+   img {
+    width: 30px;
+    height: 30px;
+   }
+
+   img.disabled {
+    opacity: 0.4;
+   }
+
+   label:first-child {
+    width: 120px;
+    height: 30px;
+    float: left;
+    text-align: right;
+    padding-right: 10px;
+
+    & ~ label {
+     display: block;
+     margin-left: 130px;
+     height: 30px;
+    }
+   }
+
+   &.submit {
+    text-align: center;
+    padding: 20px;
+   }
+
+   button {
+    width: 100px;
+   }
   }
  }
 }
