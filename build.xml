@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DD layout viewer" default="concatenate" basedir=".">
+ <description>Compiles and compresses resources.</description>
+
+ <target name="concatenate" description="Concatenate all js files">
+  <concat destfile="res/js/jquery.js">
+   <fileset dir="res/js/jquery" includes="*.js" />
+  </concat>
+  <concat destfile="res/js/viewer.js">
+   <fileset dir="res/js/viewer" includes="*.js" />
+   <fileset dir="res/data" includes="*.js" />
+  </concat>
+ </target>
+</project>

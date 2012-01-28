@@ -2,12 +2,7 @@
 <html>
  <head>
   <title>Dungeon Defenders Viewer</title>
-  <script src="res/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-  <script src="res/js/jquery.cookie.js" type="text/javascript"></script>
-  <script src="res/js/jquery-ui-1.8.17.custom.min.js" type="text/javascript"></script>
-  <script src="res/data/levels.js" type="text/javascript"></script>
-  <script src="res/data/towers.js" type="text/javascript"></script>
-  <script src="res/js/util.js" type="text/javascript"></script>
+  <script src="res/js/jquery.js" type="text/javascript"></script>
   <script src="res/js/viewer.js" type="text/javascript"></script>
 
   <link rel="icon" type="image/png" href="res/images/coreIcon.png"/>
@@ -30,8 +25,10 @@
     <p>Drag and drop towers onto the map</p>
    </div>
    <div id="stats">
-    <h2>Stats</h2>
+    <h2>Information</h2>
     <p id="du_wrapper">Defense Units: <span id="du_used">0</span>/<span id="du_total">0</span></p>
+    <p>Difficulty: <span id="difficulty">Unknown</span></p>
+    <p>Type: <span id="type">Unknown</span></p>
    </div>
    <div id="notes">
     <h2>Notes</h2>
