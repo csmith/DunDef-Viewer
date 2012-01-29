@@ -196,6 +196,43 @@ $(function() {
     query.map = level;
    }
 
+   var difficulty = $('select[name=search_difficulty]').val();
+   if (difficulty != 'any') {
+    query.difficulty = difficulty;
+   }
+
+   var type = $('select[name=search_type]').val();
+   if (type != 'any') {
+    query.type = type;
+   }
+
+   query.classes = '';
+   $.each($('#search_classes img'), function() {
+    if (!$(this).hasClass('disabled')) {
+     if (query.classes.length > 0) { query.classes += ','; }
+     query.classes += this.id.replace('search_', '');
+    }
+   });
+
+   query.mode = '';
+   if ($('input[name=search_hc]').is(':checked')) {
+    query.mode += ',hardcore';
+   }
+   if ($('input[name=search_mm]').is(':checked')) {
+    query.mode += ',mixed';
+   }
+   if ($('input[name=search_ps]').is(':checked')) {
+    query.mode += ',strategy';
+   }
+
+   if (query.mode.length == 0) {
+    delete query.mode;
+   } else {
+    query.mode = query.mode.substr(1);
+   }
+
+   query.limit = 100;
+
    doSearch(query);
    return false;
   }
@@ -214,12 +251,29 @@ $(function() {
    var body = $('#searchresults tbody');
    $.each(data, function() {
     this.difficulty = this.difficulty || 'unknown';
+    this.type = (this.type && this.type != 'none') ? this.type : 'unknown';
 
     var tr = $('<tr>');
     tr.append($('<td>').append($('<a>').attr('href', '#' + this.id).text(this.id).click(hideSearch)));
     tr.append($('<td>').text(levels[this.level - 1] ? levels[this.level - 1].name : 'Unknown!'));
     tr.append($('<td>').addClass(this.difficulty).text(this.difficulty));
     tr.append($('<td>').addClass(this.type).text(this.type));
+    tr.append($('<td>').html(getModesHTML(this.mode)));
+
+    var classes = this.classes;
+    var td = $('<td>');
+    $.each(['huntress', 'apprentice', 'monk', 'squire'], function(k, v) {
+     var url = v == 'apprentice' ? 'mage' : v;
+     var img = $('<img>').attr('src', 'res/images/classes/' + url + '_icon.png')
+                         .attr('alt', v);
+     if ($.inArray(v, classes) == -1) {
+      img.addClass('disabled');
+     }
+     td.append(img);
+    });
+
+    tr.append(td);
+
     body.append(tr);
    });
   }
@@ -232,6 +286,23 @@ $(function() {
 
  var thisLevel;
  var layout;
+
+ function getModesHTML(modes) {
+  var res = '';
+  modes && $.each(modes, function() {
+   if (this == "hardcore") {
+    res = '<abbr title="Hardcore">hc</abbr> ' + res;
+   } else if (this == "mixed") {
+    res = '<abbr title="Mixed mode">mm</abbr> ' + res;
+   } else if (this == "strategy") {
+    res = '<abbr title="Pure strategy">ps</abbr> ' + res;
+   } else if (this == "none") {
+    res = 'none';
+   }
+  });
+
+  return res || 'unknown';
+ }
 
  function updateDefenseUnits() {
   var used = 0;
@@ -391,21 +462,9 @@ $(function() {
   $('#difficulty').text(difficulty).removeClass().addClass(difficulty);
 
   var type = layout.type && layout.type != 'none' ? layout.type : "unknown";
-  var modes = '';
-  layout.mode && $.each(layout.mode, function() {
-   if (this == "hardcore") {
-    modes = '<abbr title="Hardcore">hc</abbr> ' + modes;
-   } else if (this == "mixed") {
-    modes = '<abbr title="Mixed mode">mm</abbr> ' + modes;
-   } else if (this == "strategy") {
-    modes = '<abbr title="Pure strategy">ps</abbr> ' + modes;
-   } else if (this == "none") {
-    modes = 'none';
-   }
-  });
 
   $('#type').text(type);
-  $('#modes').html(modes == '' ? 'unknown' : modes);
+  $('#modes').html(getModesHTML(layout.mode));
 
   $('#du_total').text(thisLevel.du);
  }
