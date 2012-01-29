@@ -175,6 +175,59 @@ $(function() {
   $.each(levels, function(key) {
    $('<option>').val(key + 1).text(this.name).appendTo(sel);
   });
+
+  function showSearch() {
+   $('#searchcontainer').show();
+  }
+
+  function hideSearch() {
+   $('#searchcontainer').hide();
+  }
+
+  function clearSearchResults() {
+   $('#searchresults tbody tr').remove();
+  }
+
+  function buildSearchQuery() {
+   var query = {};
+
+   var level = $('select[name=search_map]').val();
+   if (level != 'any') {
+    query.map = level;
+   }
+
+   doSearch(query);
+   return false;
+  }
+
+  function doSearch(data) {
+   clearSearchResults();
+
+   $.ajax({
+    url: 'res/data/layouts/search',
+    data: data,
+    success: handleSearch
+   });
+  }
+
+  function handleSearch(data) {
+   var body = $('#searchresults tbody');
+   $.each(data, function() {
+    this.difficulty = this.difficulty || 'unknown';
+
+    var tr = $('<tr>');
+    tr.append($('<td>').append($('<a>').attr('href', '#' + this.id).text(this.id).click(hideSearch)));
+    tr.append($('<td>').text(levels[this.level - 1] ? levels[this.level - 1].name : 'Unknown!'));
+    tr.append($('<td>').addClass(this.difficulty).text(this.difficulty));
+    tr.append($('<td>').addClass(this.type).text(this.type));
+    body.append(tr);
+   });
+  }
+
+  $('#search_submit').click(buildSearchQuery);
+  $('#search').click(showSearch);
+  $('#searchmask').click(hideSearch);
+  $('#searchclose').click(hideSearch);
  })();
 
  var thisLevel;

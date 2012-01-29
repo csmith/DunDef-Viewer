@@ -182,6 +182,12 @@ body .tower.ui-draggable-dragging { z-index: 101; }
  right: 200px;
  bottom: 100px;
 
+ h3 {
+  color: @heading-color;
+  text-align: left;
+  border-bottom: 1px solid @border-color;
+ }
+
  #searchterms {
   width: 300px;
   float: left;
@@ -224,6 +230,23 @@ body .tower.ui-draggable-dragging { z-index: 101; }
 
    button {
     width: 100px;
+   }
+  }
+ }
+
+ #searchresults {
+  margin-left: 330px;
+
+  table {
+   width: 100%;
+
+   thead tr {
+    color: @heading-color;
+    font-weight: bold;
+   }
+
+   tr {
+    text-align: left;
    }
   }
  }
