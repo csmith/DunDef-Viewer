@@ -142,4 +142,18 @@ var levels = [
   cores: [{left: 230, top: 134}, {left: 234, top: 444}, {left: 413, top: 419}, {left: 38, top: 569}]
  },
 
+ {}, // Uber monsterfest
+ {}, // Tree of life
+
+ {
+  name: 'Mistymire Forest',
+  minimap: 'res/images/minimaps/Mistymire.png',
+  image: 'http://placehold.it/200x100',
+  du: 140,
+  offsets: {left: 170, top: 50},
+  scale: {left: 1.1, top: 1.1},
+  towerscale: 0.5,
+  cores: [{left: 129, top: 354}, {left: 241, top: 242}, {left: 318, top: 284}, {left: 299, top: 404}]
+ },
+
 ];

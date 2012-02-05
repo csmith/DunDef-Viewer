@@ -68,7 +68,7 @@ $(function() {
   $.each(levels, function(key) {
    var name = this.name;
 
-   $('<button>')
+   name && $('<button>')
     .append($('<img>').attr('src', this.image))
     .append($('<p>').text(name))
     .click(function() {
@@ -151,7 +151,7 @@ $(function() {
 
   var sel = $('select[name=search_map]');
   $.each(levels, function(key) {
-   $('<option>').val(key + 1).text(this.name).appendTo(sel);
+   this.name && $('<option>').val(key + 1).text(this.name).appendTo(sel);
   });
 
   function showSearch() {
